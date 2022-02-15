@@ -12,9 +12,10 @@ export type TextState = {
 function CipherTextDisplay(props: TextState) {
     let text = props.text;
     const chunks: string[] = [];
-    while (text.length > 36) {
+    while (text.includes(' ') && text.length > 36) {
         let space = 36;
         for (; space >= 0 && text[space] !== ' '; space--) {}
+        space = space <= 0 ? text.indexOf(' ') : space;
         chunks.push(text.substring(0, space));
         text = text.substring(space + 1);
     }
