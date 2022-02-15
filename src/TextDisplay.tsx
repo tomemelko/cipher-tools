@@ -9,7 +9,7 @@ export type TextState = {
     mapping: Mapping;
 };
 
-function Letter(props: TextState) {
+function CipherTextDisplay(props: TextState) {
     let text = props.text;
     const chunks: string[] = [];
     while (text.length > 36) {
@@ -32,4 +32,4 @@ function Letter(props: TextState) {
     </table>;
 }
 
-export default Letter;
+export default CipherTextDisplay;

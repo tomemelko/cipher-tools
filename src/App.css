@@ -106,6 +106,38 @@
   /* box-shadow: 0px 4px 20px 0px transparent; */
 }
 
+.ctInput {
+  display: inline-block;
+  width: 80%;
+  background: transparent;
+  -webkit-transition: background-color 150ms linear;
+  -ms-transition: background-color 150ms linear;
+  transition: background-color 150ms linear;
+}
+
+.ctInput:hover {
+  /* background: var(--pt-hover); */
+}
+
+.ctInput textarea {
+  font-family: monospace;
+  background-color: transparent;
+  color: var(--ct);
+  font-size: calc(10px + 2vmin);
+  text-align: left;
+  border: 0;
+  width: 100%;
+  padding: 5px;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; 
+  
+  /* box-shadow: 0px 4px 20px 0px transparent; */
+}
+
 .ctLetter {
   color: var(--ct);
 }
