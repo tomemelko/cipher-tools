@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { TextState } from './TextDisplay';
 
 export type CiphertestEditorProps = TextState & {
@@ -6,9 +6,10 @@ export type CiphertestEditorProps = TextState & {
 }
 
 function CipherTextEditor(props: CiphertestEditorProps) {
+  const { onChange, text } = props;
   function onBoxChanged(e: ChangeEvent<HTMLTextAreaElement>) {
     const newVal = e.currentTarget.value.toLocaleUpperCase();
-    props.onChange(newVal);
+    onChange(newVal);
   }
 
   return (
@@ -16,7 +17,7 @@ function CipherTextEditor(props: CiphertestEditorProps) {
       <textarea
         placeholder="?"
         className="ctInput"
-        value={props.text}
+        value={text}
         onChange={onBoxChanged}
       />
     </div>

@@ -9,6 +9,7 @@ module.exports = {
     'airbnb',
     'airbnb/hooks',
     'plugin:jest/recommended',
+    'plugin:eslint-comments/recommended',
   ],
   overrides: [
   ],
@@ -24,6 +25,10 @@ module.exports = {
   rules: {
     'import/extensions': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'eslint-comments/require-description': 'error',
+    'max-len': ['warn', { code: 200 }],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
   },
   settings: {
     'import/resolver': {

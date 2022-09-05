@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { Mapping, TextState } from './TextDisplay';
 
 export type MappingEditorProps = TextState & {
@@ -6,6 +6,7 @@ export type MappingEditorProps = TextState & {
 }
 
 function MappingDisplay(props: MappingEditorProps) {
+  const { onMappingChange, text, mapping } = props;
   function onBoxChanged(e: ChangeEvent<HTMLInputElement>) {
     let newVal = e.currentTarget.value.toUpperCase();
     if (newVal.length > 1) {
@@ -15,11 +16,11 @@ function MappingDisplay(props: MappingEditorProps) {
       e.preventDefault();
       return;
     }
-    props.onMappingChange({ [e.target.id]: newVal });
+    onMappingChange({ [e.target.id]: newVal });
   }
 
-  function freq(text: string, char: number): number | string {
-    return (text.match(new RegExp(String.fromCharCode(char + 65), 'g')) || []).length || '-';
+  function freq(inputText: string, char: number): number | string {
+    return (inputText.match(new RegExp(String.fromCharCode(char + 65), 'g')) || []).length || '-';
   }
 
   return (
@@ -27,21 +28,21 @@ function MappingDisplay(props: MappingEditorProps) {
       <table className="mapLetterTable">
         <tbody>
           <tr>
-            {Array.from(Array(26)).map((_, i) => <td className="freqLetter" key={i}>{freq(props.text, i)}</td>)}
+            {Array.from(Array(26)).map((char, i) => <td className="freqLetter" key={char}>{freq(text, i)}</td>)}
           </tr>
           <tr>
-            {Array.from(Array(26)).map((_, i) => <td className="mapLetter" key={i}>{String.fromCharCode(i + 65)}</td>)}
+            {Array.from(Array(26)).map((char, i) => <td className="mapLetter" key={char}>{String.fromCharCode(i + 65)}</td>)}
           </tr>
         </tbody>
       </table>
       <div className="mapInputContainer">
-        {Array.from(Array(26)).map((_, i) => (
-          <div className="mapInput" key={i}>
+        {Array.from(Array(26)).map((char, i) => (
+          <div className="mapInput" key={char}>
             <input
               placeholder="?"
               onFocus={((event: ChangeEvent<HTMLInputElement>) => event.target.select())}
               className="mapInput"
-              value={props.mapping[String.fromCharCode(i + 65)] || ''}
+              value={mapping[String.fromCharCode(i + 65)] || ''}
               onChange={onBoxChanged}
               id={String.fromCharCode(i + 65)}
             />

@@ -8,7 +8,7 @@ class App extends React.Component<any, TextState> {
   constructor(props: any) {
     super(props);
     const mapping: Mapping = {};
-    for (let i = 0; i <= 26; i++) {
+    for (let i = 0; i <= 26; i += 1) {
       mapping[String.fromCharCode(i + 65)] = '';
     }
     this.state = { text: 'CYUP CYDMLC, BDCPXKMN KM POT NBQCC. Q PQZ, CKXTMP HTP LTQUTMKMN, YM POT RBYWTM SYMSBTPT YU CKLTFQXW. Q HTXXYF RQXX BYXXC, FKPO Q LYN RYDMLKMN QUPTB.'.toUpperCase(), mapping };
@@ -19,21 +19,22 @@ class App extends React.Component<any, TextState> {
   };
 
   onMappingChange = (newState: Mapping) => {
-    this.setState((state, props) => ({ mapping: { ...state.mapping, ...newState } }));
+    this.setState((state) => ({ mapping: { ...state.mapping, ...newState } }));
   };
 
   render() {
+    const { mapping, text } = this.state;
     return (
       <div className="App">
         <header className="App-header">
           <div className="CipherTextPlainText">
-            <CipherTextEditor {...this.state} onChange={this.onCipherTextChange} />
+            <CipherTextEditor text={text} mapping={mapping} onChange={this.onCipherTextChange} />
           </div>
           <div className="CipherTextPlainText">
-            <CipherTextDisplay {...this.state} />
+            <CipherTextDisplay text={text} mapping={mapping} />
           </div>
           <div className="Letter-Mapping">
-            <MappingDisplay {...this.state} onMappingChange={this.onMappingChange} />
+            <MappingDisplay text={text} mapping={mapping} onMappingChange={this.onMappingChange} />
           </div>
         </header>
       </div>
