@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSizeAwareness } from 'Hooks';
 import MappingCell, { MappingCellProps } from './MappingCell';
 
 export type MappingEditorProps = Omit<MappingCellProps, 'array'>;
@@ -6,22 +7,7 @@ export type MappingEditorProps = Omit<MappingCellProps, 'array'>;
 function MappingDisplay(props: MappingEditorProps) {
   const { onMappingChange, text, mapping } = props;
 
-  const [dimensions, setDimensions] = React.useState({
-    height: window.innerHeight,
-    width: window.innerWidth,
-  });
-
-  React.useEffect(() => {
-    function handleResize() {
-      setDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth,
-      });
-    }
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  });
+  const dimensions = useSizeAwareness();
 
   const { width } = dimensions;
   if (width < 1500) {

@@ -55,7 +55,7 @@
 
 .mapLetterTable {
   table-layout: fixed;
-  width: 78%;
+  width: 98%;
   margin: 0 auto;
 }
 
@@ -66,6 +66,7 @@
 
 .freqLetter {
   color: var(--freq);
+  font-size: calc(4px + 2vmin);
 }
 
 .mapInputContainer {
