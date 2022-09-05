@@ -78,7 +78,6 @@
 
 .mapInput {
   display: inline-block;
-  width: 3%;
   background: transparent;
   -webkit-transition: background-color 150ms linear;
   -ms-transition: background-color 150ms linear;
@@ -97,15 +96,12 @@
   text-align: center;
   border: 0;
   width: 100%;
-  padding: 5px;
   margin: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
-
-  /* box-shadow: 0px 4px 20px 0px transparent; */
 }
 
 .ctInput {
