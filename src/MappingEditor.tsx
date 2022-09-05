@@ -1,54 +1,40 @@
-import React, { ChangeEvent } from 'react';
-import { Mapping, TextState } from './TextDisplay';
+import React from 'react';
+import MappingCell, { MappingCellProps } from './MappingCell';
 
-export type MappingEditorProps = TextState & {
-    onMappingChange: (mapping: Mapping) => void;
-}
+export type MappingEditorProps = Omit<MappingCellProps, 'array'>;
 
 function MappingDisplay(props: MappingEditorProps) {
   const { onMappingChange, text, mapping } = props;
-  function onBoxChanged(e: ChangeEvent<HTMLInputElement>) {
-    let newVal = e.currentTarget.value.toUpperCase();
-    if (newVal.length > 1) {
-      newVal = newVal[newVal.length - 1];
-    }
-    if (newVal !== '' && !/^[A-Z]$/.test(newVal)) {
-      e.preventDefault();
-      return;
-    }
-    onMappingChange({ [e.target.id]: newVal });
-  }
 
-  function freq(inputText: string, char: number): number | string {
-    return (inputText.match(new RegExp(String.fromCharCode(char + 65), 'g')) || []).length || '-';
-  }
+  const [dimensions, setDimensions] = React.useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
 
+  React.useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    }
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  });
+
+  const { width } = dimensions;
+  if (width < 1500) {
+    return (
+      <div>
+        <MappingCell array={Array.from(Array(13)).map((_, i) => String.fromCharCode(i + 65))} onMappingChange={onMappingChange} text={text} mapping={mapping} />
+        <MappingCell array={Array.from(Array(13)).map((_, i) => String.fromCharCode(i + 65 + 13))} onMappingChange={onMappingChange} text={text} mapping={mapping} />
+      </div>
+    );
+  }
   return (
     <div>
-      <table className="mapLetterTable">
-        <tbody>
-          <tr>
-            {Array.from(Array(26)).map((char, i) => <td className="freqLetter" key={char}>{freq(text, i)}</td>)}
-          </tr>
-          <tr>
-            {Array.from(Array(26)).map((char, i) => <td className="mapLetter" key={char}>{String.fromCharCode(i + 65)}</td>)}
-          </tr>
-        </tbody>
-      </table>
-      <div className="mapInputContainer">
-        {Array.from(Array(26)).map((char, i) => (
-          <div className="mapInput" key={char}>
-            <input
-              placeholder="?"
-              onFocus={((event: ChangeEvent<HTMLInputElement>) => event.target.select())}
-              className="mapInput"
-              value={mapping[String.fromCharCode(i + 65)] || ''}
-              onChange={onBoxChanged}
-              id={String.fromCharCode(i + 65)}
-            />
-          </div>
-        ))}
-      </div>
+      <MappingCell array={Array.from(Array(26)).map((_, i) => String.fromCharCode(i + 65))} onMappingChange={onMappingChange} text={text} mapping={mapping} />
     </div>
   );
 }

@@ -34,7 +34,8 @@
   font-family: monospace;
 }
 
-.CipherTextPlainText, .Letter-Mapping {
+.CipherTextPlainText,
+.Letter-Mapping {
   margin: 10vh;
 }
 
@@ -101,8 +102,8 @@
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  box-sizing: border-box; 
-  
+  box-sizing: border-box;
+
   /* box-shadow: 0px 4px 20px 0px transparent; */
 }
 
@@ -133,8 +134,8 @@
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   -ms-box-sizing: border-box;
-  box-sizing: border-box; 
-  
+  box-sizing: border-box;
+
   /* box-shadow: 0px 4px 20px 0px transparent; */
 }
 
@@ -154,6 +155,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
